@@ -1,6 +1,6 @@
 ---
 
-- hosts: "{{ env }}"
+- hosts: all
   gather_facts: false
   vars:
   tasks:
