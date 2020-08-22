@@ -1,0 +1,9 @@
+---
+# tasks file for precheck
+
+- include_tasks: group_by.yml
+  tags:
+    - group_by
+    - precheck
+    - patching
+    - final_validation
