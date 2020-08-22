@@ -3,19 +3,7 @@
 - name: Running setup to gather variables
   setup:
 
-- name: Conditional on Centos, set our custom variables
-  block:
-
-  - name: Group our servers by app
-    group_by:
-      key: appserver_{{ ansible_local.custom.rebooting.appserver }}
-
-  - name: Group our servers by F5
-    group_by:
-      key: f5component_{{ ansible_local.custom.rebooting.f5component }}
-  when: "'Cent' in ansible_distribution"
-
-- name: Major Distribution
+- name: Group by Major Distribution
   group_by:
     key: "{{ansible_distribution}}{{ ansible_distribution_major_version }}"
 
