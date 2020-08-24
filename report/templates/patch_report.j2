@@ -5,10 +5,10 @@ Hosts Patching Status:
 
 {% for host in ansible_play_hosts_all %}
 {{ host }} status:
-{% if true in hostvars[host].kernel_reboot_needed %}
+{% if hostvars[host].grubby_check.stdout is not search(hostvars[host].ansible_kernel) %}
  {{ host }} needs a reboot to new kernel {{ hostvars[host].grubby_check.stdout }}
 {% endif %}
-{% if true in hostvars[host].needs_restarting %}
+{% if hostvars[host].needs_restarting_check.rc == 1 %}
  {{ host }} needs a reboot for library and packages
 {% endif %}
 {% endfor %}
