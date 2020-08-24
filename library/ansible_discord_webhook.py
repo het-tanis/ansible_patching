@@ -15,8 +15,7 @@ short_description: Sending messages using Discord webhooks.
 version_added: "2.7"
 
 description:
-    - "This is a simple module for sending messages using Discord webhook
-s using the python requests library."
+    - "This is a simple module for sending messages using Discord webhooks using the python requests library."
 
 author: Sam Wedgwood (@shadycake)
 
@@ -53,15 +52,13 @@ EXAMPLES = '''
 # sending a message
 - name: Send Hello World! to the webhook
   discord_webhook:
-    webhook_url: https://canary.discordapp.com/api/webhooks/XXXXXXXXXXXXX
-XXXXX/XXXXXXXXXXXXXXXXXXXXX
+    webhook_url: https://canary.discordapp.com/api/webhooks/XXXXXXXXXXXXXXXXXX/XXXXXXXXXXXXXXXXXXXXX
     content: Hello, world!
 
 # pass in a message and have changed true
 - name: Send Hello World! to the webhook under CoolDude username
   discord_webhook:
-    webhook_url: https://canary.discordapp.com/api/webhooks/XXXXXXXXXXXXX
-XXXXX/XXXXXXXXXXXXXXXXXXXXX
+    webhook_url: https://canary.discordapp.com/api/webhooks/XXXXXXXXXXXXXXXXXX/XXXXXXXXXXXXXXXXXXXXX
     content: Hello, world!
     username: CoolDude
 '''
@@ -115,8 +112,7 @@ def run_module():
         "changed": False
     }
 
-    # the AnsibleModule object will be our abstraction working with Ansib
-le
+    # the AnsibleModule object will be our abstraction working with Ansible
     # this includes instantiation, a couple of common attr would be the
     # args/params passed to the execution, as well as if the module
     # supports check mode
