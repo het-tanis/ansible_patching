@@ -7,6 +7,7 @@
 - name: Check the value of needs-restarting -r on the system
   shell: needs-restarting -r
   register: needs_restarting_check
+  failed_when: false
 
 - name: set reboot flag only if a server has 1 for the exit code of needs-restarting -r
   set_fact:
