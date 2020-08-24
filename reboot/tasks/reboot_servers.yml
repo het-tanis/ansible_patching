@@ -1,5 +1,7 @@
 ---
 
+# Needs Restarting checks
+
 - name: Set variable to false for needs restarting check
   set_fact:
     needs_restarting: false
@@ -17,3 +19,26 @@
 - name: show me the fact
   debug:
     var: needs_restarting
+
+# Kernel checks against grubby
+# Some systems don't have grubby by default and it should be added.
+# That may get added to precheck in the future.
+
+- name: Set variable to false for kernel_reboot_needed
+  set_fact:
+    kernel_reboot_needed: false
+
+- name: Check the grubby version of the kernel
+  shell: grubby --default-kernel
+  register: grubby_check
+
+- name: set reboot flag only if a server has a newer kernel set in grubby
+  set_fact:
+    kernel_reboot_needed: true
+  when: '"ansible_kernel" not in grubby_check.stdout'
+
+- name: show me the fact
+  debug:
+    var: kernel_reboot_needed
+
+
