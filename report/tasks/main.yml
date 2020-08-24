@@ -15,7 +15,8 @@
 
 - name: show me the patch report
   debug:
-    var: path_report.stdout
+    var: patch_report.stdout
+  delegate_to: localhost
 
 # Send the output to discord when we're ready
 
