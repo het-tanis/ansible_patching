@@ -16,4 +16,4 @@
   apt:
     name: "*"
     state: latest
-  when: "'Kali-GNU' in ansible_distribution"
+  when: "'Kali' in ansible_distribution"
