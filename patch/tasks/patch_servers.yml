@@ -11,3 +11,9 @@
     name: "*"
     state: latest
   when: "'SUSE' in ansible_distribution"
+
+- name: Patch all debian based servers
+  apt:
+    name: "*"
+    state: latest
+  when: "'Kali-GNU' in ansible_distribution"
