@@ -8,7 +8,6 @@ Hosts Patching Status:
 {% if hostvars[host].kernel_reboot_needed is true %}
  {{ host }} needs a reboot to new kernel {{ hostvars[host].grubby_check.stdout }}
 {% endif %}
-{% endfor %}
 {% if hostvars[host].needs_restarting is true %}
  {{ host }} needs a reboot for library and packages
 {% endif %}
