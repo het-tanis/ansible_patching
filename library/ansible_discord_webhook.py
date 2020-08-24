@@ -15,8 +15,7 @@ short_description: Sending messages using Discord webhooks.
 version_added: "2.7"
 
 description:
-    - "This is a simple module for sending messages using Discord webhook
-s using the python requests library."
+    - "This is a simple module for sending messages using Discord webhooks using the python requests library."
 
 author: Sam Wedgwood (@shadycake)
 
