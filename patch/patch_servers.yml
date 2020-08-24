@@ -1,0 +1,13 @@
+---
+
+- name: Patch all CentOS servers to most current version of installed software
+  yum:
+    name: "*"
+    state: latest
+  when "'CentOS' in ansible_distribution"
+
+- name: Patch all Suse servers to most current version of installed software
+  zypper:
+    name: "*"
+    state: latest
+  when "'SUSE' in ansible_distribution"
