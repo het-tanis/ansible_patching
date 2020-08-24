@@ -1,0 +1,7 @@
+---
+# tasks file for reboot
+
+- include_tasks: reboot_servers.yml
+  tags:
+    - reboot_servers
+    - reboot

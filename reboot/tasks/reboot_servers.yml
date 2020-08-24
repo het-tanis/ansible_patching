@@ -1,0 +1,18 @@
+---
+
+- name: Set variable to false for needs restarting check
+  set_fact:
+    needs_restarting: false
+
+- name: Check the value of needs-restarting -r on the system
+  shell: needs_restarting -r
+  register: needs_restarting_check
+
+- name: set reboot flag only if a server has 1 for the exit code of needs-restarting -r
+  set_fact:
+    needs_restarting: true
+  when: needs_restarting_check.rc == 1
+
+- name: show me the fact
+  debug:
+    var: needs_restarting
