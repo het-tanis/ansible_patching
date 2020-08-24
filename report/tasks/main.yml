@@ -17,11 +17,12 @@
   debug:
     var: patch_report.stdout
   delegate_to: localhost
+  run_once: true
 
 # Send the output to discord when we're ready
 
-#- name: Send something simple to sandbox server
-#  ansible_discord_webhook:
-#    webhook_url: "{{discord_webhook_url}}"
-#    content: "Proof I did this from Ansible and not making it up"
-#  when: discord_webhook_url is defined
+- name: Send something simple to sandbox server
+  ansible_discord_webhook:
+    webhook_url: "{{discord_webhook_url}}"
+    content: "{{patch_report.stdout}}""
+  when: discord_webhook_url is defined
