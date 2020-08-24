@@ -5,15 +5,18 @@
     name: "*"
     state: latest
   when: "'CentOS' in ansible_distribution"
+  failed_when: false
 
 - name: Patch all Suse servers to most current version of installed software
   zypper:
     name: "*"
     state: latest
   when: "'SUSE' in ansible_distribution"
+  failed_when: false
 
 - name: Patch all debian based servers
   apt:
     name: "*"
     state: latest
   when: "'Kali' in ansible_distribution"
+  failed_when: false
