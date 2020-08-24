@@ -1,0 +1,7 @@
+---
+# tasks file for precheck
+
+- include_tasks: patch_servers.yml
+  tags:
+    - patch_servers
+    - patching
