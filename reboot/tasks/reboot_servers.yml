@@ -5,7 +5,7 @@
     needs_restarting: false
 
 - name: Check the value of needs-restarting -r on the system
-  shell: needs_restarting -r
+  shell: needs-restarting -r
   register: needs_restarting_check
 
 - name: set reboot flag only if a server has 1 for the exit code of needs-restarting -r
