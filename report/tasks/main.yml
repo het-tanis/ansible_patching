@@ -1,0 +1,26 @@
+---
+
+- name: Patch Report Generation
+  template:
+    src: patch_report.j2
+    dest: "/tmp/patch_report.{{ansible_date_time.date}}.txt"
+  delegate_to: localhost
+  run_once: true
+
+- name: Patch Report output capture
+  shell: "cat /tmp/patch_report.{{ansible_date_time.date}}.txt"
+  register: patch_report
+  delegate_to: localhost
+  run_once: true
+
+- name: show me the patch report
+  debug:
+    var: path_report.stdout
+
+# Send the output to discord when we're ready
+
+#- name: Send something simple to sandbox server
+#  ansible_discord_webhook:
+#    webhook_url: "{{discord_webhook_url}}"
+#    content: "Proof I did this from Ansible and not making it up"
+#  when: discord_webhook_url is defined
