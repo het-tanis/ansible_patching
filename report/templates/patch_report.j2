@@ -1,0 +1,15 @@
+Patch Report on systems on {{ansible_date_time.date}} at {{ansible_date_time.time}}
+
+Hosts Patching Status:
+----------------------------------------------
+
+{% for host in ansible_play_hosts_all %}
+{{ host }} status:
+{% if hostvars[host].kernel_reboot_needed is true %}
+ {{ host }} needs a reboot to new kernel {{ hostvars[host].grubby_check.stdout }}
+{% endif %}
+{% endfor %}
+{% if hostvars[host].needs_restarting is true %}
+ {{ host }} needs a reboot for library and packages
+{% endif %}
+{% endfor %}
