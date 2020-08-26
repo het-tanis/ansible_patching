@@ -30,6 +30,7 @@
 
 - name: Check the grubby version of the kernel
   shell: grubby --default-kernel
+  failed_when: false
   register: grubby_check
 
 - name: set reboot flag only if a server has a newer kernel set in grubby
