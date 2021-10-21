@@ -3,12 +3,12 @@
 - name: Patch Report Generation
   template:
     src: patch_report.j2
-    dest: "/tmp/patch_report.{{ansible_date_time.date}}.txt"
+    dest: "/tmp/patch_report.txt"
   delegate_to: localhost
   run_once: true
 
 - name: Patch Report output capture
-  shell: "cat /tmp/patch_report.{{ansible_date_time.date}}.txt"
+  shell: "cat /tmp/patch_report.txt"
   register: patch_report
   delegate_to: localhost
   run_once: true
@@ -21,10 +21,9 @@
 
 # Send the output to discord when we're ready
 
-- name: Send something simple to sandbox server
-  ansible_discord_webhook:
-    webhook_url: "{{discord_webhook_url}}"
-    content: "{{patch_report.stdout}}"
+- name: Running this via curl to output
+  command: "curl -i -H 'Expect: application/json' -F file=@/tmp/patch_report.txt -F 'payload_json={ \"wait\": true, \"content\": \"Patching\", \"username\": \"Patchbot\" }' {{ discord_webhook_url }}"
+  failed_when: False
   when: discord_webhook_url is defined
   delegate_to: localhost
   run_once: true
