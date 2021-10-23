@@ -21,9 +21,33 @@
 
 # Send the output to discord when we're ready
 
-- name: Running this via curl to output
-  command: "curl -i -H 'Expect: application/json' -F file=@/tmp/patch_report.txt -F 'payload_json={ \"wait\": true, \"content\": \"Patching\", \"username\": \"Patchbot\" }' {{ discord_webhook_url }}"
-  failed_when: False
+#Added because messages in discord have a 2000 unicode character limit 
+- name: Send a file to sandbox channel in discord 
+  uri:
+    url: "{{discord_webhook_url}}"
+    method: 'POST'
+    body_format: json
+    headers:
+      Content-Type: 'application/json'
+    body:
+      file: "{{ lookup('file', '/tmp/patch_report.txt') }}"
+      payload_json:
+        wait: true
+        content: CIS_Ubuntu_Benchmark
+        username: Ansible_CIS_Ubuntu
   when: discord_webhook_url is defined
   delegate_to: localhost
   run_once: true
+  register: discord_output
+  failed_when: false
+
+- name: Debug
+  debug:
+    var: discord_output
+
+#- name: Running this via curl to output
+#  command: "curl -i -H 'Expect: application/json' -F file=@/tmp/patch_report.txt -F 'payload_json={ \"wait\": true, \"content\": \"Patching\", \"username\": \"Patchbot\" }' {{ discord_webhook_url }}"
+#  failed_when: False
+#  when: discord_webhook_url is defined
+#  delegate_to: localhost
+#  run_once: true
