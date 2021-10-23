@@ -23,11 +23,13 @@
 
 - set_fact:
     payload:
-      file: "{{ lookup('file', '/tmp/patch_report.txt') }}"
+      file: 
+        filename: /tmp/patch_report.txt
+        mime_type: text/plain
       payload_json:
         wait: true
-        content: CIS_Ubuntu_Benchmark
-        username: Ansible_CIS_Ubuntu
+        content: Patching
+        username: Ansible_Patching
 
 - name : Debug
   debug:
@@ -38,9 +40,7 @@
   uri:
     url: "{{discord_webhook_url}}"
     method: 'POST'
-    body_format: json
-    headers:
-      Content-Type: 'application/json'
+    body_format: form-multipart
     body: "{{ payload }}"
   when: discord_webhook_url is defined
   delegate_to: localhost
